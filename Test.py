@@ -26,6 +26,9 @@ class GameLoop:
         self.apply_personality()
         self.replan("initial")
 
+    # -----------------------------------------------------------
+    # Personality Application
+    # -----------------------------------------------------------
     def apply_personality(self):
         if self.personality is None:
             self.actions = list(self.act)
@@ -48,7 +51,7 @@ class GameLoop:
             self.logs(f"Replanned ({reason}) :: {[a.Name for a in self.plan]}")
         else:
             self.logs(f"Replanned ({reason}) :: No plan found!")
-          
+
     def logs(self, msg: str):
         stamp = f"[t{self.tick:03d}]"
         line = f"{stamp} {msg}"
@@ -112,7 +115,7 @@ class GameLoop:
         print("[p:Personality] \t")
         print("="*60)
 
-    def _step(self):
+    def steps(self):
         self.tick += 1
 
         # apply personality world effects
@@ -141,6 +144,9 @@ class GameLoop:
             self.logs("🎯 GOAL SATISFIED!")
             self.auto = False
 
+    # -----------------------------------------------------------
+    # Main Loop
+    # -----------------------------------------------------------
     def run(self):
         while True:
             self.render()
